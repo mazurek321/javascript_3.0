@@ -15,19 +15,40 @@
   });
 
   cw1.addEventListener("click", function () {
-    answer.innerHTML = "Loading...";
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((array) => {
-        const element = array.find((element) => element.id === 5);
+    // answer.innerHTML = "Loading...";
+    // fetch("https://jsonplaceholder.typicode.com/posts")
+    //   .then((response) => response.json())
+    //   .then((array) => {
+    //     const element = array.find((element) => element.id === 5);
 
-        answer.innerHTML = "";
-        if (element) {
-          answer.innerHTML += `<strong>${element.id} - <span>${element.title}</span></strong>`;
-          answer.innerHTML += `<p>${element.body}</p>`;
-        } else {
-          answer.innerHTML = "Post not found";
-        }
+    //     answer.innerHTML = "";
+    //     if (element) {
+    //       answer.innerHTML += `<strong>${element.id} - <span>${element.title}</span></strong>`;
+    //       answer.innerHTML += `<p>${element.body}</p>`;
+    //     } else {
+    //       answer.innerHTML = "Post not found";
+    //     }
+    //   });
+
+    answer.innerHTML = "Processing...";
+
+    const newPost = {
+      userId: 200,
+      id: 200,
+      title: "pawelek",
+      body: "bartek",
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        answer.innerHTML = `Dodano nowy post o ID = ${newPost.id}`;
       });
   });
 
