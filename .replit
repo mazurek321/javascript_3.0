@@ -9,3 +9,7 @@ channel = "stable-24_05"
 publicDir = "/"
 deploymentTarget = "static"
 run = ["sh", "-c", "npx serve ."]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
