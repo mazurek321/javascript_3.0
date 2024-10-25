@@ -17,7 +17,7 @@
 
   cw1.addEventListener("click", function () {
     okno.style.display = "block";
-    answer.innerHTML = "Loading...";
+    //answer.innerHTML = "Loading...";
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((array) => {
@@ -62,10 +62,12 @@
 
   cw3.addEventListener("click", function () {
     //TODO
-    answer.innerHTML = "Loading...";
+    okno.style.display = "block";
+    //answer.innerHTML = "Loading...";
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((array) => {
+        okno.style.display = "none";
         answer.innerHTML = "";
         array.forEach(function (element) {
           answer.innerHTML += `<strong>${element.id} - <span>${element.title}</span></strong>                                    <p>${element.body}</p>`;
