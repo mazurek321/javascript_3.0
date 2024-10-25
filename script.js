@@ -5,6 +5,7 @@
   const cw3 = document.getElementById("cw3");
   const answer = document.getElementById("answer");
   const okno = document.getElementById("okno");
+  const myJson = document.getElementById("myJson");
 
   example.addEventListener("click", function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -13,6 +14,28 @@
         console.log(array);
         answer.innerHTML = JSON.stringify(array);
       });
+  });
+
+  myJson.addEventListener("click", function () {
+    answer.innerHTML = "";
+    const postUrl =
+      "https://my-json-server.typicode.com/lewapFT9/jsonDataBase/posts";
+    const commentUrl =
+      "https://my-json-server.typicode.com/lewapFT9/jsonDataBase/comments";
+
+    Promise.all([
+      fetch(postUrl).then((response) => response.json()),
+      fetch(commentUrl).then((response) => response.json()),
+    ]).then(([posts, comments]) => {
+      posts.forEach(function (post) {
+        answer.innerHTML += `<strong>${post.id}</strong> - ${post.title}<br>`;
+        comments.forEach(function (comment) {
+          if (comment.postId === post.id) {
+            answer.innerHTML += `&nbsp;&nbsp;Comment: <strong>${comment.id}</strong> - ${comment.body}<br>`;
+          }
+        });
+      });
+    });
   });
 
   cw1.addEventListener("click", function () {
@@ -31,8 +54,6 @@
           answer.innerHTML = "Post not found";
         }
       });
-
-
   });
 
   cw2.addEventListener("click", function () {
@@ -56,7 +77,7 @@
       .then((data) => {
         answer.innerHTML = `Dodano nowy post o ID = ${newPost.id}`;
       });
-    console.log(`Dodano nowy post o ID = ${newPost.id}`)
+    console.log(`Dodano nowy post o ID = ${newPost.id}`);
     //TODO
   });
 
