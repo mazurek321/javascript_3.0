@@ -6,6 +6,8 @@
   const answer = document.getElementById("answer");
   const okno = document.getElementById("okno");
   const myJson = document.getElementById("myJson");
+  const lab_3 = document.getElementById("lab_3");
+  const tabela = document.getElementById("tabela");
 
   example.addEventListener("click", function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -83,6 +85,7 @@
 
   cw3.addEventListener("click", function () {
     //TODO
+    
     okno.style.display = "block";
     //answer.innerHTML = "Loading...";
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -93,6 +96,19 @@
         array.forEach(function (element) {
           answer.innerHTML += `<strong>${element.id} - <span>${element.title}</span></strong>                                    <p>${element.body}</p>`;
         });
+      });
+  });
+
+  lab_3.addEventListener("click", function () {
+    answer.innerHTML = "";
+    tabela.innerHTML = "<tr><th>Name</th><th>Capital</th><th>Population</th><th>Region</th><th>Subregion</th></tr>";
+    fetch("https://restcountries.com/v3.1/capital/Warsaw")
+      .then((response) => response.json())
+      .then((array) => {
+        tabela.innerHTML += `<tr><td>${array[0].name.common}</td><td>
+        ${array[0].capital}</td><td>${array[0].population}</td>
+        <td>${array[0].region}</td><td>${array[0].subregion}</td></tr>`;
+      
       });
   });
 })();
