@@ -105,6 +105,7 @@
 
   lab_3.addEventListener("click", function () {
     answer.innerHTML = "";
+    tabela_weather.innerHTML="";
     tabela.innerHTML =
       "<tr><th>Name</th><th>Capital</th><th>Population</th><th>Region</th><th>Subregion</th></tr>";
     fetch("https://restcountries.com/v3.1/capital/Warsaw")
@@ -117,7 +118,7 @@
   });
   cm_2.addEventListener("click", function () {
     tabela.innerHTML = "";
-    tabela_weather.innerHTML = "";
+    tabela_weather.innerHTML = "<tr><th>Id</th><th>Name</th><th>DataCoverage</th><th>MinDate</th><th>MaxDate</th></tr>";
     const response = fetch(
       "https://www.ncei.noaa.gov/cdo-web/api/v2/stations",
       {
@@ -132,19 +133,9 @@
       })
       .then((data) => {
         data.results.forEach(function (element) {
-          // answer.innerHTML = element.id;
           tabela_weather.innerHTML += `<tr><td>${element.id}</td><td>${element.name}</td><td>${element.datacoverage}</td>
 <td>${element.mindate}</td><td>${element.maxdate}</td></tr>`;
         });
-
-        // if (response.ok) {
-        // const data = response.json();
-        // console.log(data);
-        // answer.innerHTML = "";
-        // answer.innerHTML = JSON.stringify(data);
-        // } else {
-        //   throw new Error('Failed to fetch protected data');
-        // }
       });
   });
 })();
